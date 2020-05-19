@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Kermalis.SudokuSolver.Core
 {
-    static class Utils
+    public static class Utils
     {
         public static readonly ReadOnlyCollection<int> OneToNine = new ReadOnlyCollection<int>(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 

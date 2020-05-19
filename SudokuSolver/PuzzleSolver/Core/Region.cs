@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Kermalis.SudokuSolver.Core
 {
-    class Region
+    public class Region
     {
         public readonly ReadOnlyCollection<Cell> Cells;
 

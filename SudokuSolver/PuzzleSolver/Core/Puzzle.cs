@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Kermalis.SudokuSolver.Core
 {
-    class Puzzle
+    public class Puzzle
     {
         public readonly ReadOnlyCollection<Region> Rows;
         public readonly ReadOnlyCollection<Region> Columns;
@@ -140,6 +140,22 @@ namespace Kermalis.SudokuSolver.Core
                         board[j][i] = value;
                     }
                 }
+            }
+
+            return new Puzzle(board, false);
+        }
+
+        public static Puzzle Load(int[] values)
+        {
+            if (values.Length != 81)
+            {
+                throw new InvalidDataException("Puzzle must have 81 values.");
+            }
+
+            int[][] board = Utils.CreateJaggedArray<int[][]>(9, 9);
+            for (int i = 0; i < values.Length; i++)
+            {
+                board[i / 9][i % 9] = values[i];
             }
 
             return new Puzzle(board, false);

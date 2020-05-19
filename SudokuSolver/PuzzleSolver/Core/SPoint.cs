@@ -1,6 +1,6 @@
 ﻿namespace Kermalis.SudokuSolver.Core
 {
-    class SPoint
+    public class SPoint
     {
         public readonly int X, Y;
 
