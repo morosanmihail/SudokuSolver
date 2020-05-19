@@ -49,7 +49,7 @@ namespace Kermalis.SudokuSolver.Core
             Puzzle = puzzle;
         }
 
-        public void DoWork(object sender, DoWorkEventArgs e)
+        public bool SolveSync()
         {
             Puzzle.RefreshCandidates();
             Puzzle.LogAction("Begin");
@@ -86,8 +86,12 @@ namespace Kermalis.SudokuSolver.Core
                     break;
                 }
             } while (true);
+            return solved;
+        }
 
-            e.Result = solved;
+        public void DoWork(object sender, DoWorkEventArgs e)
+        {
+            e.Result = SolveSync();
         }
 
         bool RunTechnique()
