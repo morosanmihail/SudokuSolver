@@ -118,6 +118,43 @@ namespace Kermalis.SudokuSolver.Core
             }
         }
 
+        public int BadRegions()
+        {
+            int result = 0;
+            foreach(var row in Rows)
+            {
+                if (!RegionUniqueValues(row))
+                {
+                    result++;
+                }
+            }
+            foreach (var column in Columns)
+            {
+                if (!RegionUniqueValues(column))
+                {
+                    result++;
+                }
+            }
+            foreach (var blocks in Blocks)
+            {
+                if (!RegionUniqueValues(blocks))
+                {
+                    result++;
+                }
+            }
+            return result;
+        }
+
+        public int RemainingUnsolvedValues()
+        {
+            return Rows.Sum(row => row.Cells.Count(c => c.Value == 0));
+        }
+
+        private bool RegionUniqueValues(Region region)
+        {
+            return !(region.Cells.Select(a => a.Value).Distinct().Count(a => a > 0) != region.Cells.Count(a => a.Value > 0));
+        }
+
         public static Puzzle Load(string fileName)
         {
             string[] fileLines = File.ReadAllLines(fileName);
